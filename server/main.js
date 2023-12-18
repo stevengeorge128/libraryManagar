@@ -23,7 +23,7 @@ app.get("/get/mountain", async (req, res) => {
     if (gettingBook.ok) {
         let data = await gettingBook.json();
         let handlingFetchData = bookFetchHandler.parseBookSearch(data)
-        res.status(200).end("Book Found")
+        res.status(200).json(handlingFetchData)
       } else {
         console.error("Error fetching data:", gettingBook.status, gettingBook.statusText);
       }
