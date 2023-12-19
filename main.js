@@ -15,49 +15,44 @@ app.use("", (req, res, next) => {
     next()
 })
 
+// Allow request from the client
+app.use(function (req, res, next) {
+    res.setHeader('Access-Control-Allow-Origin', "http://127.0.0.1:5000");
+    next();
+});
+
+// Serve static files
 app.use(express.static('public_html'))
 
-// app.get("/get/mountain", async (req, res) => {
-//     try {
-//     let gettingBook = await fetch("https://openlibrary.org/search.json?title=my+side+of+the+mountain")
-//     if (gettingBook.ok) {
-//         let data = await gettingBook.json();
-//         let handlingFetchData = bookFetchHandler.parseBookSearch(data)
-//         res.status(200).json(handlingFetchData)
-//       } else {
-//         console.error("Error fetching data:", gettingBook.status, gettingBook.statusText);
-//       }
-//     } catch (err) {
-//         console.error(err);
-//         res.status(404).end()
-//     }
-// })
-
-// app.get("/get/physics", async (req, res) => {
-//     try {
-//     let gettingBook = await fetch("https://openlibrary.org/search.json?title=quantum+field+theory&author=Ryder")
-//     if (gettingBook.ok) {
-//         let data = await gettingBook.json();
-//         let handlingFetchData = bookFetchHandler.parseBookSearch(data)
-//         res.status(200).json(handlingFetchData)
-//       } else {
-//         console.error("Error fetching data:", gettingBook.status, gettingBook.statusText);
-//       }
-//     } catch (err) {
-//         console.error(err);
-//         res.status(404).end()
-//     }
-// })
-
-app.get("/get/:title/:author", async (req, res) => {
+// First route requested when user searches for a book
+app.get("/get/title/:title", async (req, res) => {
     try {
         let handlingFetchData = await bookFetchHandler.parseBookSearch(req.params.title, req.params.author)
-        res.status(200).json(handlingFetchData);
+        let userResponse = handlingFetchData;
+        delete userResponse.extendedInfo;
+        delete userResponse.allDocs;
+        // console.log(userResponse);
+        // console.log(handlingFetchData)
+        res.status(200).json(userResponse);
+        //res.status(200).json(handlingFetchData);
     } catch (err) {
         console.error(err);
         res.status(404).end()
     }
 })
+
+// // First route requested when user searches for a book
+// app.get("/get/author/:author", async (req, res) => {
+//     try {
+//         let handlingFetchData = await bookFetchHandler.parseBookSearch(req.params.title, req.params.author)
+//         //console.log(JSON.stringify(handlingFetchData))
+
+//         res.status(200).json(handlingFetchData);
+//     } catch (err) {
+//         console.error(err);
+//         res.status(404).end()
+//     }
+// })
 
 
 
