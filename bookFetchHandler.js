@@ -4,12 +4,15 @@ async function parseBookSearch(title, author) {
         if (gettingBook.ok) {
             let data = await gettingBook.json();
             let numFound = data.numFound;
+            //console.log(data)
+
             if (numFound > 0) {
                 let firstDoc = data.docs[0];
                 console.log(firstDoc)
                 let title = firstDoc.title;
-                let authorName = firstDoc.author_name;
+                let authorName = firstDoc.author_name[0];
                 let isbn = firstDoc.isbn[0];
+                let coverId = firstDoc.cover_i;
                 let firstPublished = firstDoc.first_publish_year;
                 let authorKey = firstDoc.author_key
                 let extendedInfo = JSON.stringify(firstDoc);
@@ -20,6 +23,7 @@ async function parseBookSearch(title, author) {
                     title: title,
                     author: authorName,
                     isbn: isbn,
+                    coverId: coverId,
                     firstPublished: firstPublished,
                     authorKey: authorKey,
                     subjects: subjects,
@@ -42,7 +46,7 @@ async function parseBookSearch(title, author) {
 
 async function getBookImageByIsbn(isbn){
     try {
-        const response = await fetch(`https://covers.openlibrary.org/b/isbn/${isbn}-M.jpg`);
+        const response = await fetch(`https://covers.openlibrary.org/b/isbn/${isbn}-L.jpg`);
 
         if (!response.ok) {
             throw new Error('Failed to fetch book cover');

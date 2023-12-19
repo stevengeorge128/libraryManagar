@@ -14,28 +14,32 @@ async function bookSearch() {
     } else {
 
         // If only title
-        //if (bookAuthor == ""){
-            let searching = await fetch(`http://localhost:5000/get/title/${bookTitle}`)
-            if (searching.ok) {
-                let response = await searching.json()
-                //window.alert("The Response is good")
-                //console.log(response  )
+        if (bookAuthor == ""){
+        let searching = await fetch(`http://localhost:5000/get/title/${bookTitle}`)
+        if (searching.ok) {
+            let response = await searching.json()
+            let id = response.coverId;
+            let thisBookPrompt = document.getElementById("inputSearchResult");
+            thisBookPrompt.innerHTML = 
+            `<div id="thisTheBookPrompt">
+            <div>Is this your book?</div>
+            <ul>
+                <li>Title: ${response.title}</li>
+                <li>Author: ${response.author}</li>
+                <li>First Published: ${response.firstPublished}</li>
+            </ul>
+            </div>`;
 
-                let thisBookPrompt = document.getElementById("thisTheBookPrompt");
-                thisBookPrompt.innerHTML = `
-                <h2>Is this your book?</h2>
-                <ul>
-                    <li>Title: ${response.title}</li>
-                    <li>Author: ${response.author}</li>
-                    <li>First Published: ${response.firstPublished}</li>
-                </ul>`
+            
 
-                window.alert("page updated")
+            let thisBookImage = document.getElementById("thisTheBookImage");
+            thisBookImage.innerHTML = `<img id = "searchResultImage" src="https://covers.openlibrary.org/b/id/${id}-M.jpg" alt="background image">`;
 
-            } else{
-                window.alert("Fetch failed")
-            }
-        // }
+        } else {
+            window.alert("Fetch failed");
+        }
+
+
         // // If only author
         // else if (bookTitle == "" ) {
         //     let searching = await fetch(`http://localhost:5000/get/title/${bookTitle}`)
@@ -61,7 +65,7 @@ async function bookSearch() {
 
     }
 
-
+    }
 }
 
 window.onload = listenToSearchSubmit;

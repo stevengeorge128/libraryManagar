@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 
 <html lang="en">
@@ -12,29 +11,58 @@
 
 <body>
 
-    <div class = "header">
+    <div class="header">
         <h1>LIBRARY MANAGER</h1>
     </div>
 
-    <div id = searchBody>
-    <h1>BOOK SEARCH</h1>
+    <div id=bookSearchHeading>BOOK SEARCH</div>
 
-    <label for="bookSearchInput">BOOK TITLE:</label>
-    <input type="text" id = "bookSearchInput">
 
-    <label for="authorInput">AUTHOR:</label>
-    <input type="text" id = "authorInput">
+    <div id="searchAndResultDiv">
+        <div id="searchFields">
 
-    <input type="submit" id = "submitBookSearch"    value="SEARCH">
+            <div id="bookTitleSearchDiv">
+                <label for="bookSearchInput">BOOK TITLE:</label>
+                <input  class = "searchInput" type="text" id="bookSearchInput">
+            </div>
 
-    <div id = "thisTheBookPrompt">
+            <div id="bookAuthorSearchDiv">
+                <label for="authorInput">AUTHOR:</label>
+                <input class = "searchInput" type="text" id="authorInput">
+            </div>
+            <input type="submit" id="submitBookSearch" value="SEARCH">
 
-        <!-- <img src="./colorkit.png" alt="background image"> -->
+
+
+        </div>
+
+        <div id="inputSearchResult">
+            <!-- <div id="thisTheBookPrompt">
+                <div>Is this your book?</div>
+                <ul>
+                    <li>Title: ${response.title}</li>
+                    <li>Author: ${response.author}</li>
+                    <li>First Published: ${response.firstPublished}</li>
+                </ul>
+
+            </div> -->
+
+
+
+        </div>
+    </div>
+
+
+    <div id="thisTheBookImage">
+
+
+        <!-- <img src="https://covers.openlibrary.org/b/isbn/1587244225-M.jpg" alt="background image"> -->
+
 
 
     </div>
 
-</div>
+
 
 </body>
 
