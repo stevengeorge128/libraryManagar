@@ -1,7 +1,9 @@
 
-function listenToSearchSubmit() {
+function indexEventListeners() {
     document.getElementById("submitBookSearch").addEventListener("click", bookSearch);
 }
+
+
 
 async function bookSearch() {
     let bookTitle = document.getElementById("bookSearchInput").value;
@@ -18,22 +20,30 @@ async function bookSearch() {
             let searching = await fetch(`http://localhost:5000/get/title/${bookTitle}`)
             if (searching.ok) {
                 let response = await searching.json()
+                let docId = response[1]
+                window.localStorage.setItem("currentTitleLookup", docId);
+                response = response[0]
                 let id = response.coverId;
                 let thisBookPrompt = document.getElementById("inputSearchResult");
                 thisBookPrompt.innerHTML =
                     `<div id="thisTheBookPrompt">
-            <div>Is this your book?</div>
-            <ul>
-                <li>Title: ${response.title}</li>
-                <li>Author: ${response.authors}</li>
-                <li>First Published: ${response.firstPublished}</li>
-            </ul>
-            </div>`;
+                    <ul>
+                        <li>Title: ${response.title}</li>
+                        <li>Author: ${response.authors}</li>
+                        <li>First Published: ${response.firstPublished}</li>
+                    </ul>
+                    </div>
+
+            
+            `;
 
 
 
                 let thisBookImage = document.getElementById("rightSideResult");
-                thisBookImage.innerHTML = response.imgSrc;
+                thisBookImage.innerHTML = '<div>Is this your book?</div>' + 
+                response.imgSrc + 
+                '<div id = "yesNoDiv"> <input class = "yesNoTitleSearch" type="submit" id="titleSearchIsTheBook" onclick="yesToTitleSearch()" value="YES">' + 
+                '<input class = "yesNoTitleSearch" type="submit" id="titleSearchIsNotTheBook" onclick="noToTitleSearch()" value="NO"></div>';
 
             } else {
                 window.alert("Fetch failed");
@@ -49,6 +59,8 @@ async function bookSearch() {
                 let length = response.length
                 // console.log(response)
                 let j = 1
+                let thisBookPrompt = document.getElementById("inputSearchResult");
+                thisBookPrompt.innerHTML = "";
                 for (let i = 0; i < length; i++) {
                     //if ((response[i].title != response[0].title) && (response[i].authors != response[0].authors) && (response[i].firstPublished != response[0].firstPublished) && (response[i].imgSrc != response[0].imgSrc)) {
                     newHtml += `
@@ -77,11 +89,25 @@ async function bookSearch() {
         }
         // If both author and title
         else {
-            let searching = await fetch(`http://localhost:5000/get/title/${bookTitle}`)
+            let searching = await fetch(`http://localhost:5000/get/authAndTitle/${bookTitle}/${bookAuthor}`)
             if (searching.ok) {
+
                 let response = await searching.json()
-                window.alert("The Response is good")
-                console.log(response)
+                let id = response.coverId;
+                let thisBookPrompt = document.getElementById("inputSearchResult");
+                thisBookPrompt.innerHTML =
+                    `<div id="thisTheBookPrompt">
+                    <ul>
+                        <li>Title: ${response.title}</li>
+                        <li>Author: ${response.authors}</li>
+                        <li>First Published: ${response.firstPublished}</li>
+                    </ul>
+                    </div>`;
+
+
+
+                let thisBookImage = document.getElementById("rightSideResult");
+                thisBookImage.innerHTML = "<div>Is this your book?</div>" + response.imgSrc;
             } else {
                 window.alert("Fetch failed")
             }
@@ -92,4 +118,14 @@ async function bookSearch() {
     }
 }
 
-window.onload = listenToSearchSubmit;
+function yesToTitleSearch() {
+    console.log("YES")
+
+}
+
+function noToTitleSearch() {
+    console.log("NO")
+
+}
+
+window.onload = indexEventListeners;
