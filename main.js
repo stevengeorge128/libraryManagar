@@ -24,14 +24,14 @@ app.use(function (req, res, next) {
 // Serve static files
 app.use(express.static('public_html'))
 
-// First route requested when user searches for a book
+// First route requested when user searches for a book by title
 app.get("/get/title/:title", async (req, res) => {
     try {
-        let handlingFetchData = await bookFetchHandler.parseBookSearch(req.params.title, req.params.author)
+        let handlingFetchData = await bookFetchHandler.parseBookTitleSearch(req.params.title)
         let userResponse = handlingFetchData;
         delete userResponse.extendedInfo;
         delete userResponse.allDocs;
-        // console.log(userResponse);
+        console.log(userResponse);
         // console.log(handlingFetchData)
         res.status(200).json(userResponse);
         //res.status(200).json(handlingFetchData);
@@ -41,21 +41,28 @@ app.get("/get/title/:title", async (req, res) => {
     }
 })
 
-// // First route requested when user searches for a book
-// app.get("/get/author/:author", async (req, res) => {
-//     try {
-//         let handlingFetchData = await bookFetchHandler.parseBookSearch(req.params.title, req.params.author)
-//         //console.log(JSON.stringify(handlingFetchData))
+// // First route requested when user searches for a book by author
+app.get("/get/author/:author", async (req, res) => {
+    try {
+        let handlingFetchData = await bookFetchHandler.parseBookAuthorSearch(req.params.author)
+        //console.log(JSON.stringify(handlingFetchData))
+        // console.log(req.params.author)
+        
+        //console.log(handlingFetchData)
+        res.status(200).json(handlingFetchData)
+    } catch (err) {
+        console.error(err);
+        res.status(404).end()
+    }
+})
 
-//         res.status(200).json(handlingFetchData);
-//     } catch (err) {
-//         console.error(err);
-//         res.status(404).end()
-//     }
-// })
 
-
-
+app.get("/get/google", async (req, res) => {
+    const getting = await fetch("https://www.googleapis.com/books/v1/volumes?q=intitle:modern+elementary+particle+physics");
+    const response = await getting.json();
+    console.log(response.items[0]);
+    res.json(response)
+})
 
 
 app.listen(port, () =>
