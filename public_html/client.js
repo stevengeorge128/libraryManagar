@@ -41,7 +41,7 @@ async function bookSearch() {
 
                 let thisBookImage = document.getElementById("rightSideResult");
                 thisBookImage.innerHTML = '<div>Is this your book?</div>' + 
-                response.imgSrc + 
+                response.imageHtml + 
                 '<div id = "yesNoDiv"> <input class = "yesNoTitleSearch" type="submit" id="titleSearchIsTheBook" onclick="yesToTitleSearch()" value="YES">' + 
                 '<input class = "yesNoTitleSearch" type="submit" id="titleSearchIsNotTheBook" onclick="noToTitleSearch()" value="NO"></div>';
 
@@ -69,7 +69,7 @@ async function bookSearch() {
                                 <li>Title: ${response[i].title}</li>
                                 <li>Author: ${response[i].authors}</li>
                                 <li>First Published: ${response[i].firstPublished}</li>
-                                ${response[i].imgSrc}
+                                ${response[i].imageHtml}
                             </ul>
                             `
                     j++;
@@ -95,6 +95,13 @@ async function bookSearch() {
                 let response = await searching.json()
                 let id = response.coverId;
                 let thisBookPrompt = document.getElementById("inputSearchResult");
+
+                let docId = response[1]
+                window.localStorage.setItem("currentTitleLookup", docId);
+                response = response[0]
+               // console.log(response)
+
+
                 thisBookPrompt.innerHTML =
                     `<div id="thisTheBookPrompt">
                     <ul>
@@ -105,9 +112,12 @@ async function bookSearch() {
                     </div>`;
 
 
-
+                
                 let thisBookImage = document.getElementById("rightSideResult");
-                thisBookImage.innerHTML = "<div>Is this your book?</div>" + response.imgSrc;
+                thisBookImage.innerHTML ='<div>Is this your book?</div>' + 
+                 response.imageHtml + 
+                '<div id = "yesNoDiv"> <input class = "yesNoTitleSearch" type="submit" id="titleSearchIsTheBook" onclick="yesToTitleSearch()" value="YES">' + 
+                '<input class = "yesNoTitleSearch" type="submit" id="titleSearchIsNotTheBook" onclick="noToTitleSearch()" value="NO"></div>';
             } else {
                 window.alert("Fetch failed")
             }

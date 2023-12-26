@@ -22,16 +22,26 @@ var Schema = mongoose.Schema;
 
 // Establish four required schemas
 var tempLookupSchema = new Schema({
+    // title: String,
+    // authors: [],
+    // isbn: String,
+    // coverIdOpenLib: String,
+    // firstPublished: String,
+    // authorKeyOpenLib: [],
+    // subjectsOpenLib: [],
+    // imgSrc: String,
+    // dewey: String,
+    // congress: String,
+    // extendedInfo: String,
+    // allDocs: String
+
     title: String,
     authors: [],
+    link: String,
     isbn: String,
-    coverIdOpenLib: String,
     firstPublished: String,
-    authorKeyOpenLib: [],
-    subjectsOpenLib: [],
-    imgSrc: String,
-    dewey: String,
-    congress: String,
+    imageLink: String,
+    imageHtml: String,
     extendedInfo: String,
     allDocs: String
 });
@@ -94,11 +104,20 @@ app.get("/get/author/:author", async (req, res) => {
 app.get("/get/authAndTitle/:title/:author", async (req, res) => {
     try {
         let handlingFetchData = await bookFetchHandler.parseTitleAndAuthorSearch(req.params.title, req.params.author)
-        //console.log(JSON.stringify(handlingFetchData))
         // console.log(req.params.author)
         
         //console.log(handlingFetchData)
-        res.status(200).json(handlingFetchData)
+
+        
+        let temp = new tempLookup(handlingFetchData);
+        let savingTemp = await temp.save();
+        let id = savingTemp._id.toHexString()
+        delete handlingFetchData.extendedInfo;
+        delete handlingFetchData.allDocs;
+
+
+
+        res.status(200).json([handlingFetchData, id])
     } catch (err) {
         console.error(err);
         res.status(404).end()

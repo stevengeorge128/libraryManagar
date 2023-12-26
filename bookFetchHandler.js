@@ -1,43 +1,43 @@
 async function parseBookTitleSearch(title) {
     try {
-        let gettingBookFromOpenLib = await fetch(`https://openlibrary.org/search.json?title=${title}`)
-        if (gettingBookFromOpenLib.ok) {
-            let data = await gettingBookFromOpenLib.json();
-            let numFound = data.numFound;
+        //let gettingBookFromOpenLib = await fetch(`https://openlibrary.org/search.json?title=${title}`)
+        //if (gettingBookFromOpenLib.ok) {
+            // let data = await gettingBookFromOpenLib.json();
+            // let numFound = data.numFound;
             //console.log(data)
 
-            if (numFound > 0) {
-                console.log("OPEN LIB HAS THE BOOK")
-                let firstDoc = data.docs[0];
-                console.log(firstDoc)
-                let title = firstDoc.title;
-                let authorName = firstDoc.author_name;
-                let isbn = firstDoc.isbn[0];
-                let coverId = firstDoc.cover_i;
-                let firstPublished = firstDoc.first_publish_year;
-                let authorKey = firstDoc.author_key
-                let extendedInfo = JSON.stringify(firstDoc);
-                let subjects = firstDoc.subject_facet;
-                let dewey = firstDoc.ddc_sort;
-                let libCongress = firstDoc.lcc_sort;
-                let allDocs = JSON.stringify(data);
-                let thisInfo = {
-                    title: title,
-                    authors: authorName,
-                    isbn: isbn,
-                    coverIdOpenLib: coverId,
-                    firstPublished: firstPublished,
-                    authorKeyOpenLib: authorKey,
-                    subjectsOpenLib: subjects,
-                    imgSrc: `<img id = "searchResultImage" src="https://covers.openlibrary.org/b/id/${coverId}-M.jpg" alt="background image"> `,
-                    dewey: dewey,
-                    congress: libCongress,
-                    extendedInfo: extendedInfo,
-                    allDocs: allDocs
-                };
-                return thisInfo;
-            } else {
-                console.log("CHECKING GOOGLE BOOKS API")
+            // if (numFound > 0) {
+            //     console.log("OPEN LIB HAS THE BOOK")
+            //     let firstDoc = data.docs[0];
+            //     //console.log(firstDoc)
+            //     let title = firstDoc.title;
+            //     let authorName = firstDoc.author_name;
+            //     let isbn = firstDoc.isbn[0];
+            //     let coverId = firstDoc.cover_i;
+            //     let firstPublished = firstDoc.first_publish_year;
+            //     let authorKey = firstDoc.author_key
+            //     let extendedInfo = JSON.stringify(firstDoc);
+            //     let subjects = firstDoc.subject_facet;
+            //     let dewey = firstDoc.ddc_sort;
+            //     let libCongress = firstDoc.lcc_sort;
+            //     let allDocs = JSON.stringify(data);
+            //     let thisInfo = {
+            //         title: title,
+            //         authors: authorName,
+            //         isbn: isbn,
+            //         coverIdOpenLib: coverId,
+            //         firstPublished: firstPublished,
+            //         authorKeyOpenLib: authorKey,
+            //         subjectsOpenLib: subjects,
+            //         imgSrc: `<img id = "searchResultImage" src="https://covers.openlibrary.org/b/id/${coverId}-M.jpg" alt="background image"> `,
+            //         dewey: dewey,
+            //         congress: libCongress,
+            //         extendedInfo: extendedInfo,
+            //         allDocs: allDocs
+            //     };
+            //     return thisInfo;
+            // } else {
+                console.log("CHECKING GOOGLE BOOKS API TITLE SEARCH")
                 let gettingBookFromGoogle = await fetch("https://www.googleapis.com/books/v1/volumes?q=intitle:" + title)
 
                 if (gettingBookFromGoogle.ok){
@@ -49,33 +49,27 @@ async function parseBookTitleSearch(title) {
                         //console.log(data)
                         let firstDoc = data.items[0];
                         //console.log(data)
-                       // console.log(firstDoc)
-                        console.log(firstDoc.volumeInfo)
+                        //console.log(firstDoc)
+                        //console.log(firstDoc.volumeInfo)
     
                         let title = firstDoc.volumeInfo.title;
                         let authors = firstDoc.volumeInfo.authors;
+                        let link = firstDoc.volumeInfo.selfLink
                         let isbn = firstDoc.volumeInfo.industryIdentifiers[0].identifier;
-                        let coverId = undefined;
                         let firstPublished = firstDoc.volumeInfo.publishedDate;
-                        let authorKey = undefined;
-                        let subjects = undefined;
-                        let dewey = undefined;
-                        let libCongress = undefined;
+   
                         let extendedInfo = JSON.stringify(firstDoc);
                         let allDocs = JSON.stringify(data);
                         let imgLink = firstDoc.volumeInfo.imageLinks.thumbnail + "&fife=w800"
-    
+                        
                         let thisInfo = {
                             title: title,
                             authors: authors,
+                            link: link,
                             isbn: isbn,
-                            coverIdOpenLib: coverId,
                             firstPublished: firstPublished,
-                            authorKeyOpenLib: authorKey,
-                            subjectsOpenLib: subjects,
-                            imgSrc: `<img id = "searchResultImage" src="${imgLink}" alt="background image"> `,
-                            dewey: dewey,
-                            congress: libCongress,
+                            imageLink: imgLink,
+                            imageHtml: `<img id = "searchResultImage" src="${imgLink}" alt="background image"> `,
                             extendedInfo: extendedInfo,
                             allDocs: allDocs
                         };
@@ -85,11 +79,11 @@ async function parseBookTitleSearch(title) {
                     }
 
                    
-                }
+                //}
 
                 return false;
             }
-        }
+        //}
     } catch (error) {
         console.log(error)
         console.error("error in fetching book");
@@ -121,13 +115,13 @@ async function parseBookAuthorSearch(author) {
         let data = await gettingBookFromOpenLib.json();
         //console.log(data.docs[0]);
         let numFound = data.numFound;
-        console.log(data)
+        //console.log(data)
         var userResponse = [];
         if (numFound > 0) { 
             for (let i = 0; i < data.docs.length; i ++ ){
                 let doc = data.docs[i];
                 console.log("_______________________________ \n " + i + " \n")
-                console.log(doc)
+                //console.log(doc)
                 try{
 
                 
@@ -178,45 +172,47 @@ async function parseBookAuthorSearch(author) {
 
 async function parseTitleAndAuthorSearch(title, author){
     try {
-        let gettingBookFromOpenLib = await fetch(`https://openlibrary.org/search.json?title=${title}&author=${author}`)
-        if (gettingBookFromOpenLib.ok) {
-            let data = await gettingBookFromOpenLib.json();
-            let numFound = data.numFound;
-            //console.log(data)
+        // let gettingBookFromOpenLib = await fetch(`https://openlibrary.org/search.json?title=${title}&author=${author}`)
+        // if (gettingBookFromOpenLib.ok) {
+        //     let data = await gettingBookFromOpenLib.json();
+        //     let numFound = data.numFound;
+        //     //console.log(data)
 
-            if (numFound > 0) {
-                console.log("OPEN LIB HAS THE BOOK")
-                let firstDoc = data.docs[0];
-                console.log(firstDoc)
-                let title = firstDoc.title;
-                let authorName = firstDoc.author_name;
-                let isbn = firstDoc.isbn[0];
-                let coverId = firstDoc.cover_i;
-                let firstPublished = firstDoc.first_publish_year;
-                let authorKey = firstDoc.author_key
-                let extendedInfo = JSON.stringify(firstDoc);
-                let subjects = firstDoc.subject_facet;
-                let dewey = firstDoc.ddc_sort;
-                let libCongress = firstDoc.lcc_sort;
-                let allDocs = JSON.stringify(data);
-                let thisInfo = {
-                    title: title,
-                    authors: authorName,
-                    isbn: isbn,
-                    coverIdOpenLib: coverId,
-                    firstPublished: firstPublished,
-                    authorKeyOpenLib: authorKey,
-                    subjectsOpenLib: subjects,
-                    imgSrc: `<img id = "searchResultImage" src="https://covers.openlibrary.org/b/id/${coverId}-M.jpg" alt="background image"> `,
-                    dewey: dewey,
-                    congress: libCongress,
-                    extendedInfo: extendedInfo,
-                    allDocs: allDocs
-                };
-                return thisInfo;
-            } else {
-                console.log("CHECKING GOOGLE BOOKS API")
-                let gettingBookFromGoogle = await fetch("https://www.googleapis.com/books/v1/volumes?q=intitle:" + title)
+        //     if (numFound > 0) {
+        //         console.log("OPEN LIB HAS THE BOOK")
+        //         let firstDoc = data.docs[0];
+        //         //console.log(firstDoc)
+        //         let title = firstDoc.title;
+        //         let authorName = firstDoc.author_name;
+        //         let isbn = firstDoc.isbn[0];
+        //         let coverId = firstDoc.cover_i;
+        //         let firstPublished = firstDoc.first_publish_year;
+        //         let authorKey = firstDoc.author_key
+        //         let extendedInfo = JSON.stringify(firstDoc);
+        //         let subjects = firstDoc.subject_facet;
+        //         let dewey = firstDoc.ddc_sort;
+        //         let libCongress = firstDoc.lcc_sort;
+        //         let allDocs = JSON.stringify(data);
+        //         let thisInfo = {
+        //             title: title,
+        //             authors: authorName,
+        //             isbn: isbn,
+        //             coverIdOpenLib: coverId,
+        //             firstPublished: firstPublished,
+        //             authorKeyOpenLib: authorKey,
+        //             subjectsOpenLib: subjects,
+        //             imgSrc: `<img id = "searchResultImage" src="https://covers.openlibrary.org/b/id/${coverId}-M.jpg" alt="background image"> `,
+        //             dewey: dewey,
+        //             congress: libCongress,
+        //             extendedInfo: extendedInfo,
+        //             allDocs: allDocs
+        //         };
+        //         return thisInfo;
+        //     } else {
+                console.log("CHECKING GOOGLE BOOKS API TITLE AND AUTHOR SEARCH")
+                //let gettingBookFromGoogle = await fetch("https://www.googleapis.com/books/v1/volumes?q=intitle:" + title)
+                let gettingBookFromGoogle = await fetch("https://www.googleapis.com/books/v1/volumes?q=intitle:" + title + "+inauthor:" + author);
+
 
                 if (gettingBookFromGoogle.ok){
                     let data = await gettingBookFromGoogle.json();
@@ -228,45 +224,39 @@ async function parseTitleAndAuthorSearch(title, author){
                         let firstDoc = data.items[0];
                         //console.log(data)
                        // console.log(firstDoc)
-                        console.log(firstDoc.volumeInfo)
+                       // console.log(firstDoc.volumeInfo)
     
-                        let title = firstDoc.volumeInfo.title;
-                        let authors = firstDoc.volumeInfo.authors;
-                        let isbn = firstDoc.volumeInfo.industryIdentifiers[0].identifier;
-                        let coverId = undefined;
-                        let firstPublished = firstDoc.volumeInfo.publishedDate;
-                        let authorKey = undefined;
-                        let subjects = undefined;
-                        let dewey = undefined;
-                        let libCongress = undefined;
-                        let extendedInfo = JSON.stringify(firstDoc);
-                        let allDocs = JSON.stringify(data);
-                        let imgLink = firstDoc.volumeInfo.imageLinks.thumbnail + "&fife=w800"
-    
-                        let thisInfo = {
-                            title: title,
-                            authors: authors,
-                            isbn: isbn,
-                            coverIdOpenLib: coverId,
-                            firstPublished: firstPublished,
-                            authorKeyOpenLib: authorKey,
-                            subjectsOpenLib: subjects,
-                            imgSrc: `<img id = "searchResultImage" src="${imgLink}" alt="background image"> `,
-                            dewey: dewey,
-                            congress: libCongress,
-                            extendedInfo: extendedInfo,
-                            allDocs: allDocs
-                        };
+                       let title = firstDoc.volumeInfo.title;
+                       let authors = firstDoc.volumeInfo.authors;
+                       let link = firstDoc.volumeInfo.selfLink
+                       let isbn = firstDoc.volumeInfo.industryIdentifiers[0].identifier;
+                       let firstPublished = firstDoc.volumeInfo.publishedDate;
+  
+                       let extendedInfo = JSON.stringify(firstDoc);
+                       let allDocs = JSON.stringify(data);
+                       let imgLink = firstDoc.volumeInfo.imageLinks.thumbnail + "&fife=w800"
+                       
+                       let thisInfo = {
+                           title: title,
+                           authors: authors,
+                           link: link,
+                           isbn: isbn,
+                           firstPublished: firstPublished,
+                           imageLink: imgLink,
+                           imageHtml: `<img id = "searchResultImage" src="${imgLink}" alt="background image"> `,
+                           extendedInfo: extendedInfo,
+                           allDocs: allDocs
+                       };
                         return thisInfo
                     } else{
                         return false
                     }
 
                    
-                }
+                //}
 
                 return false;
-            }
+           // }
         }
     } catch (error) {
         console.log(error)
