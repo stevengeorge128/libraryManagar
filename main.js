@@ -5,10 +5,12 @@ const app = express();
 const mongoose = require('mongoose');
 const { tempBookLookup } = require('./schemas');
 const bookFetchHandler = require('./bookFetchHandler');
+const moreSearchOptions = require('./moreSearchOptions');
+
 const crypto = require("crypto")
-// const parser = require('body-parser');
+const parser = require('body-parser');
 // const cookieParser = require('cookie-parser');
-// app.use(parser.json());
+app.use(parser.json());
 
 
 /*
@@ -21,7 +23,7 @@ const crypto = require("crypto")
 
 const port = 5000;
 
-const validSearches = [];
+const validSearches = ["xxx"];
 
 // Establish mongoDB connection
 const db = mongoose.connection
@@ -35,9 +37,12 @@ app.use("", (req, res, next) => {
     next()
 })
 
-// Allow request from the client
-app.use(function (req, res, next) {
-    res.setHeader('Access-Control-Allow-Origin', "http://127.0.0.1:5000");
+
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', 'http://127.0.0.1:5000');
+    res.setHeader('Access-Control-Allow-Methods', 'POST, GET, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
     next();
 });
 
@@ -68,6 +73,7 @@ app.get("/get/title/:title", async (req, res) => {
 app.get("/get/author/:author", async (req, res) => {
     try {
         let handlingFetchData = await bookFetchHandler.parseBookAuthorSearch(req.params.author)
+        console.log(handlingFetchData)
         res.status(200).json(handlingFetchData)
     } catch (err) {
         console.error(err);
@@ -100,6 +106,20 @@ app.get("/get/google", async (req, res) => {
     res.json(response)
 })
 
+app.get("/get/notTitleAndOrAuthResult/:result", (req, res) => {
+    console.log(req.params.result)
+    res.status(200).end()
+})
+
+app.post("/post/notTitleAndOrAuthResult", async (req, res) => {
+    // console.log("inside the req");
+    // console.log(req.body.tempLookup);
+    let gettingOtherSearchOptions = await moreSearchOptions.getOtherSearchResultsFromDoc(req.body.tempLookup);
+    //console.log(gettingOtherSearchOptions);
+    res.status(200).json(gettingOtherSearchOptions);
+})
+
 
 app.listen(port, () =>
     console.log(`App listening at http://localhost:${port}`))
+

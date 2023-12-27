@@ -8,6 +8,8 @@ var Schema = mongoose.Schema;
 var tempBookLookupSchema = new Schema({
     title: String,
     authors: [],
+    clientLookupHash: String,
+    googleID: String,
     link: String,
     isbn: String,
     firstPublished: String,

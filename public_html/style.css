@@ -1,6 +1,6 @@
-body{
+body {
     background-color: #1f2833;
-    background-image:  url("bg_bggenerator_com.png");
+    background-image: url("bg_bggenerator_com.png");
     /* background-size: 100% 100%; */
     background-position: center;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
@@ -14,27 +14,27 @@ body{
     width: 100%;
     height: 10%;
     top: 0;
-    font-size:20px;
+    font-size: 20px;
     display: flex;
     align-items: center;
     justify-content: left;
     padding-left: 2%;
 }
 
-#bookSearchHeading{
+#bookSearchHeading {
     color: #66FCF1;
     position: fixed;
     top: 10%;
     width: 100%;
     height: 10%;
     left: 0;
-    font-size:50px;
+    font-size: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-#searchAndResultDiv{
+#searchAndResultDiv {
     position: fixed;
     top: 22%;
     color: #66FCF1;
@@ -42,7 +42,7 @@ body{
     left: 10%;
     height: 60%;
     font-size: 40px;
-/* 
+    /* 
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -52,17 +52,17 @@ body{
 
 }
 
-#searchFields{
+#searchFields {
     padding-top: 15px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     row-gap: 20px;
- 
+
 }
 
-#thisTheBookPrompt{
+#thisTheBookPrompt {
     padding-top: 25px;
     display: flex;
     flex-direction: column;
@@ -74,10 +74,10 @@ body{
 #thisTheBookPrompt ul {
     margin: 0;
     padding: 0;
-  }
+}
 
-  
-#rightSideResult{
+
+#rightSideResult {
     position: fixed;
     top: 20%;
     color: #66FCF1;
@@ -103,48 +103,49 @@ body{
 
 } */
 
-#searchResultImage{
+#searchResultImage {
     height: 300px;
 
 }
 
-.searchInput{
-        border: 0;
-        margin-top: 15px;
-        margin-bottom: 15px;
+.searchInput {
+    border: 0;
+    margin-top: 15px;
+    margin-bottom: 15px;
 
-        padding-left: 10px;
-        margin: 0;
-        height: 20px;
-        background-color: #c5c6c75f;
-        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-        color: #66FCF1;
-        width: 350px;
-        height: 100%;
-        font-size:40px;
-        border-radius: 15px;
-        display: inline-block;
+    padding-left: 10px;
+    margin: 0;
+    height: 20px;
+    background-color: #c5c6c75f;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: #66FCF1;
+    width: 350px;
+    height: 100%;
+    font-size: 40px;
+    border-radius: 15px;
+    display: inline-block;
 }
 
-#submitBookSearch{
+#submitBookSearch {
     background-color: #c5c6c75f;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     color: #66FCF1;
     font-size: 40px;
     width: 50%;
     height: 100%;
- 
+
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: 0.05s all linear; }
+    transition: 0.05s all linear;
+}
 
-#submitBookSearch:active { 
-    transform: scale(0.98); 
-    /* Scaling button to 0.98 to its original size */ 
-    box-shadow: 3px 2px 22px 1px white; 
-    /* Lowering the shadow */ 
-} 
+#submitBookSearch:active {
+    transform: scale(0.98);
+    /* Scaling button to 0.98 to its original size */
+    box-shadow: 3px 2px 22px 1px white;
+    /* Lowering the shadow */
+}
 
 .searchLabel {
     margin-top: 15px;
@@ -153,11 +154,11 @@ body{
     width: 250px;
 }
 
-.authorSearchResultDiv{
+.authorSearchResultDiv {
     font-size: 25px;
 }
 
-.yesNoTitleSearch{
+.yesNoTitleSearch {
     background-color: #c5c6c75f;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     color: #66FCF1;
@@ -170,15 +171,47 @@ body{
     transition: 0.05s all linear;
 }
 
-.yesNoTitleSearch:active { 
-    transform: scale(0.98); 
-    /* Scaling button to 0.98 to its original size */ 
-    box-shadow: 3px 2px 22px 1px white; 
-    /* Lowering the shadow */ 
-} 
+.yesNoTitleSearch:active {
+    transform: scale(0.98);
+    /* Scaling button to 0.98 to its original size */
+    box-shadow: 3px 2px 22px 1px white;
+    /* Lowering the shadow */
+}
 
-#yesNoDiv{
+#yesNoDiv {
     display: flex;
     flex-direction: row;
     column-gap: 15px;
+}
+
+.bookListUL {
+    width: 50%;
+    ;
+    border: solid white 2px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    /* Add a smooth transition effect */
+
+}
+
+.bookListUL:hover {
+    background-color: #c5c6c77c;
+    /* Change the background color on hover */
+}
+
+
+.singleBookInResultList {
+    /* display: flex;
+    flex-direction: column; */
+
+    display: flex;
+    flex-direction: column;
+    /* Stack items vertically */
+    align-items: center;
+    /* Center items horizontally */
+    justify-content: center;
+    /* text-align: center; */
+
+
+
 }
