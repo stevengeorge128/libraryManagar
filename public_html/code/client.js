@@ -1,7 +1,8 @@
 
-function indexEventListeners() {
-    document.getElementById("submitBookSearch").addEventListener("click", bookSearch);
-}
+// function indexEventListeners() {
+//     document.getElementById("submitBookSearch").addEventListener("click", bookSearch);
+//     console.log("event listener added")
+// }
 
 var bookListInfo = [];
 
@@ -22,6 +23,7 @@ async function bookSearch() {
                 let docId = response[1]
                 window.localStorage.setItem("currentTitleLookup", docId);
                 response = response[0]
+                bookListInfo = [response];
                 let id = response.coverId;
                 let thisBookPrompt = document.getElementById("inputSearchResult");
                 thisBookPrompt.innerHTML =
@@ -38,7 +40,7 @@ async function bookSearch() {
                 let thisBookImage = document.getElementById("rightSideResult");
                 thisBookImage.innerHTML = '<div>Is this your book?</div>' +
                     response.imageHtml +
-                    '<div id = "yesNoDiv"> <input class = "yesNoTitleSearch" type="submit" id="titleSearchIsTheBook" onclick="yesToTitleAndOrAuthorSearch()" value="YES">' +
+                    '<div id = "yesNoDiv"> <input class = "yesNoTitleSearch" type="submit" id="titleSearchIsTheBook" onclick="selectThisBook(0)" value="YES">' +
                     '<input class = "yesNoTitleSearch" type="submit" id="titleSearchIsNotTheBook" onclick="noToTitleAndOrAuthorSearch()" value="NO"></div>';
 
             } else {
@@ -60,7 +62,9 @@ async function bookSearch() {
                 let thisBookPrompt = document.getElementById("inputSearchResult");
                 let docId = response[1]
                 window.localStorage.setItem("currentTitleLookup", docId);
-                response = response[0]
+                response = response[0];
+                bookListInfo = [response];
+
                 thisBookPrompt.innerHTML =
                     `<div id="thisTheBookPrompt">
                     <ul>
@@ -72,7 +76,7 @@ async function bookSearch() {
                 let thisBookImage = document.getElementById("rightSideResult");
                 thisBookImage.innerHTML = '<div>Is this your book?</div>' +
                     response.imageHtml +
-                    '<div id = "yesNoDiv"> <input class = "yesNoTitleSearch" type="submit" id="titleSearchIsTheBook" onclick="yesToTitleAndOrAuthorSearch()" value="YES">' +
+                    '<div id = "yesNoDiv"> <input class = "yesNoTitleSearch" type="submit" id="titleSearchIsTheBook" onclick="selectThisBook(0)" value="YES">' +
                     '<input class = "yesNoTitleSearch" type="submit" id="titleSearchIsNotTheBook" onclick="noToTitleAndOrAuthorSearch()" value="NO"></div>';
             } else {
                 window.alert("Fetch failed")
@@ -85,8 +89,14 @@ async function bookSearch() {
 }
 
 async function handleBookListResponse(searching) {
+
     if (searching.ok) {
         let response = await searching.json();
+        for (book of response) {
+            delete book.extendedInfo;
+            delete book.allDocs;
+        }
+
         let newHtml = '<div class = "authorSearchResultDiv">';
         let length = response.length;
         let j = 1;
@@ -111,6 +121,7 @@ async function handleBookListResponse(searching) {
         let toUpdate = document.getElementById("rightSideResult");
         newHtml += "</div>";
         toUpdate.innerHTML = newHtml;
+        document.getElementById("inputSearchResult").innerText = "Select your book from the list";
     } else {
         window.alert("Fetch failed");
 
@@ -119,8 +130,7 @@ async function handleBookListResponse(searching) {
 }
 
 function yesToTitleAndOrAuthorSearch() {
-    console.log("YES")
-    console.log(window.localStorage)
+
 
 }
 
@@ -149,11 +159,29 @@ async function noToTitleAndOrAuthorSearch() {
 
 }
 
-function selectThisBook(index){
+function selectThisBook(index) {
+
+    window.location.href = "/html/bookPage.html";
     console.log("bookSelected")
     console.log(index);
     console.log(bookListInfo[index])
-
+    let bookHash = bookListInfo[index].clientLookupHash;
+    window.localStorage.setItem("lookupHash", bookHash)    
 }
 
-window.onload = indexEventListeners;
+async function authenticate() {
+    let auth = await fetch("http://localhost:5000/auth")
+    if (auth.status == 401){
+        window.location.href = "http://localhost:5000/html/login.html";
+    }
+}
+
+// window.onload = indexEventListeners;
+window.onload = authenticate;
+
+setInterval(authenticate, 5000)
+setInterval(test, 2000)
+
+function test() {
+    console.log("client.js running")
+}

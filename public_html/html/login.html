@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link id="cssFile" rel="stylesheet" type="text/css" href="../css/loginStyle.css">
+    <script src="../code/login.js"></script>
+    <title>library manager</title>
+</head>
+
+<body>
+
+    <div class="header">
+        <h1>LIBRARY MANAGER</h1>
+    </div>
+
+
+    <div id="loginDiv">
+        <h1 class="loginField" id="loginHeading">
+            LOGIN
+        </h1>
+
+        <div class="loginField" id=usernameDivLogin>
+            <label class="loginField" for="usernameInput">USERNAME: </label>
+            <input class="loginField" type="text" id="usernameInput">
+        </div>
+
+        <div class="loginField" id="passwordDivLogin">
+            <label class="loginField" for="userPasswordInput">PASSWORD: </label>
+            <input class="loginField" type="text" id="userPasswordInput">
+        </div>
+
+
+        <input class="loginField" id="sendUserInfoButtonLogin" type="button" value="Submit"
+            onclick="login('usernameInput', 'userPasswordInput', 'loginResponse')">
+
+        <div class="loginField" id="loginResponse"></div>
+
+    </div>
+
+    <div id="createDiv">
+        <h1 class="createField" id="addUserHeading">
+            or CREATE ACCOUNT
+        </h1>
+
+        <div class="createField" id=usernameDiv>
+            <label class="createField" for="usernameInput">USERNAME: </label>
+            <input class="createField" type="text" id="userCreateInput">
+        </div>
+
+        <div class="createField" id="passwordDiv">
+            <label class="createField" for="userPasswordInput">PASSWORD: </label>
+            <input class="createField" type="text" id="userCreatePasswordInput">
+        </div>
+
+        <input class="createField" id="sendUserInfoButton" type="button" value="Submit"
+        onclick="createLogin('userCreateInput', 'userCreatePasswordInput', 'createResponse')">
+
+        <div class="createField" id="createResponse"></div>
+    </div>
+
+
+
+</body>
+
+</html>

@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="UTF-8">
-    <link id="cssFile" rel="stylesheet" type="text/css" href="./style.css">
-    <script src="./client.js"></script>
+    <link id="cssFile" rel="stylesheet" type="text/css" href="./css/indexStyle.css">
+    <script src="./code/client.js"></script>
     <title>library manager</title>
 </head>
 
@@ -30,25 +30,13 @@
                 <label class = "searchLabel" for="authorInput">AUTHOR:</label>
                 <input class = "searchInput" type="text" id="authorInput">
             </div>
-            <input type="submit" id="submitBookSearch" value="SEARCH">
+            <input type="submit" id="submitBookSearch" value="SEARCH" onclick = "bookSearch()">
 
 
 
         </div>
 
         <div id="inputSearchResult">
-            <!-- <div id="thisTheBookPrompt">
-                <div>Is this your book?</div>
-                <ul>
-                    <li>Title: ${response.title}</li>
-                    <li>Author: ${response.author}</li>
-                    <li>First Published: ${response.firstPublished}</li>
-                </ul>
-
-            </div> -->
-
-
-
         </div>
         <div id="rightSideResult">
 

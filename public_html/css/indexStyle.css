@@ -1,6 +1,6 @@
 body {
     background-color: #1f2833;
-    background-image: url("bg_bggenerator_com.png");
+    background-image: url("../backgrounds/bg_bggenerator_com.png");
     /* background-size: 100% 100%; */
     background-position: center;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
@@ -213,5 +213,14 @@ body {
     /* text-align: center; */
 
 
+
+}
+
+#inputSearchResult{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 50px;
 
 }

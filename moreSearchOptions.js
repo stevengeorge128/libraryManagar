@@ -1,4 +1,4 @@
-const { tempBookLookup } = require("./schemas")
+const { tempBookLookup } = require("./schemas/tempBookLookupSchema")
 const { createLookupInfo } = require("./createLookupInfo");
 
 

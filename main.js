@@ -3,7 +3,9 @@
 const express = require("express");
 const app = express();
 const mongoose = require('mongoose');
-const { tempBookLookup } = require('./schemas');
+const { tempBookLookup } = require('./schemas/tempBookLookupSchema');
+const { User } = require('./schemas/userSchema');
+
 const bookFetchHandler = require('./bookFetchHandler');
 const moreSearchOptions = require('./moreSearchOptions');
 
@@ -52,6 +54,74 @@ app.use(express.static('public_html'))
 // Route requested when user searches with only the title field and leaves the author field blank.
 // Gets books by title using bookFetchHandler methods and then saves the search and responds to the 
 // user.
+
+var sessions = {}
+
+app.get("/login", async (req, res) => {
+    try {
+        let sesID = addSession("dev");
+        res.status(200)
+        .cookie("login",
+            { username: "dev", sessionID: sesID },
+            { maxAge: (60000 * 10) })
+    .end("success");
+    } catch (err) {
+        console.error(err);
+        res.status(404).end()
+    }
+})
+
+app.get("/auth", async (req, res) => {
+    try {
+
+        let keys = Object.keys(sessions);
+        if (!(keys.includes("dev"))){
+            res.status(401).end("failed")
+        } else{
+            res.status(200).end("success")
+        }
+    } catch (err) {
+        console.error(err);
+        res.status(404).end()
+    }
+})
+
+
+function addSession(uname) {
+    /*
+    This function adds a user to the sessions object. The user is assigned an id and a time.
+    uname: String username
+    returns: integer sessionID
+    */
+    let sessionID = Math.floor(Math.random() * 2424242424);
+    let timeNow = Date.now();
+    sessions[uname] = { id: sessionID, time: timeNow, lookupHashes: [] };
+    return sessionID
+}
+
+
+function removeSession() {
+    /* 
+    This function checks if any users currently in sessions are timed out. If so, the
+    user is removed from the sessions array causing them to be logged out the next time they make
+    a request or reload the page
+    */
+    let currentTime = Date.now(); // Get current time
+    let usernamesFromSessions = Object.keys(sessions); // Get current session users
+    for (user in usernamesFromSessions) {
+        // For each user check if thy have existed for longer then the time specified in the 
+        // if statement. If so, log them out.
+        console.log(usernamesFromSessions[user], "\t", sessions);
+        userTime = sessions[usernamesFromSessions[user]].time;
+        if ((userTime + (60000 * 10)) < currentTime) {
+            delete sessions[usernamesFromSessions[user]]
+        }
+    }
+}
+
+setInterval(removeSession, 2000); // Check sessions every two seconds;
+
+
 app.get("/get/title/:title", async (req, res) => {
     try {
         let handlingFetchData = await bookFetchHandler.parseBookTitleSearch(req.params.title)
@@ -72,8 +142,17 @@ app.get("/get/title/:title", async (req, res) => {
 // all books by that author and responds.
 app.get("/get/author/:author", async (req, res) => {
     try {
-        let handlingFetchData = await bookFetchHandler.parseBookAuthorSearch(req.params.author)
-        console.log(handlingFetchData)
+        let handlingFetchData = await bookFetchHandler.parseBookAuthorSearch(req.params.author);
+        //console.log(handlingFetchData);
+        for (let book of handlingFetchData){
+            let temp = new tempBookLookup(book);
+            let savingTemp = await temp.save();
+            let id = savingTemp._id.toHexString()
+
+            delete book.extendedInfo;
+            delete book.allDocs;
+        }
+
         res.status(200).json(handlingFetchData)
     } catch (err) {
         console.error(err);
@@ -86,12 +165,17 @@ app.get("/get/author/:author", async (req, res) => {
 app.get("/get/authAndTitle/:title/:author", async (req, res) => {
     try {
         let handlingFetchData = await bookFetchHandler.parseTitleAndAuthorSearch(req.params.title, req.params.author) 
-        let temp = new tempBookLookup(handlingFetchData);
-        let savingTemp = await temp.save();
-        let id = savingTemp._id.toHexString()
-        delete handlingFetchData.extendedInfo;
-        delete handlingFetchData.allDocs;
-        res.status(200).json([handlingFetchData, id])
+        if (handlingFetchData == false){
+            res.status(404).end();
+        } else{
+            let temp = new tempBookLookup(handlingFetchData);
+            let savingTemp = await temp.save();
+            let id = savingTemp._id.toHexString()
+            delete handlingFetchData.extendedInfo;
+            delete handlingFetchData.allDocs;
+            res.status(200).json([handlingFetchData, id])
+        }
+
     } catch (err) {
         console.error(err);
         res.status(404).end()
