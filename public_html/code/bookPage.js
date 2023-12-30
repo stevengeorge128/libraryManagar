@@ -31,7 +31,7 @@ async function convertServerResponseToHtml(bookObj) {
     let description = extendedInfo.volumeInfo.description;
     let googleLink = extendedInfo.volumeInfo.previewLink;
 
-    let newHtml = `
+    let newRightHtml = `
 
     
     
@@ -74,7 +74,10 @@ async function convertServerResponseToHtml(bookObj) {
 
             </table>`
 
-    document.getElementById("bookPageInitialInfo").innerHTML = newHtml;
+    document.getElementById("bookPageInitialInfo").innerHTML = newRightHtml;
+
+    let img = document.getElementById("bookPageImage")
+    img.src = imageLink
 
 }
 
@@ -91,6 +94,10 @@ async function authenticate() {
     }
 }
 
+
+function backToBookSearch() {
+    window.location.href = "http://localhost:5000/";
+}
 window.onload = loadPage;
 // window.onload = authenticate;
 setInterval(authenticate, 5000)

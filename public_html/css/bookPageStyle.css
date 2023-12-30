@@ -49,7 +49,6 @@ body {
     height: 60%;
     font-size: 40px;
     overflow-y: scroll;
-    background-color: red;
     /* 
         display: flex;
         flex-direction: column;
@@ -117,23 +116,30 @@ td {
     height: 60%;
     font-size: 40px;
     overflow-y: scroll;
-    background-color: red;
     display: flex;
     flex-direction: row;
     column-gap: 15px;
-    align-items: center ;
+    /* align-items: center ; */
     justify-content: center;
+    
+}
+
+#middleWhiteLine{
+    border: solid white 1px;
+    height: 60%;
+    position: fixed;
+    top: 22%;
+    left: 49%
 }
 
 #bookPageImage{
-    height: 300px;
+    height: 100%;;
 }
 
 
 #bookPageButtons{
-    height:300px;
+    height:100%;
     width: 400px;
-    background-color: blue;
 }
 
 
@@ -142,6 +148,9 @@ td {
     flex-direction: column;
     align-items: center;
     text-align: center;
+    margin: 0;
+    height: 100%;
+    border-spacing: 20px; /* Adjust the value as needed */
 }
 .bookPageOptionsButton {
     background-color: #c5c6c75f;
@@ -151,7 +160,7 @@ td {
     color: #66FCF1;
     font-size: 20px;
     width: 100%;
-    height: 100%;
+    height: 50px;;
 
     border: none;
     border-radius: 5px;
