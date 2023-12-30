@@ -3,7 +3,9 @@ body {
     background-image: url("../backgrounds/bg_bggenerator_com.png");
     /* background-size: 100% 100%; */
     background-position: center;
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    /* font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; */
+    font-family: 'Courier New', Courier, monospace;
+
     margin: 0%;
 }
 
@@ -117,7 +119,9 @@ body {
     margin: 0;
     height: 20px;
     background-color: #c5c6c75f;
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    /* font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; */
+    font-family: 'Courier New', Courier, monospace;
+
     color: #66FCF1;
     width: 350px;
     height: 100%;
@@ -128,7 +132,9 @@ body {
 
 #submitBookSearch {
     background-color: #c5c6c75f;
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    /* font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; */
+    font-family: 'Courier New', Courier, monospace;
+
     color: #66FCF1;
     font-size: 40px;
     width: 50%;
@@ -151,7 +157,7 @@ body {
     margin-top: 15px;
 
     display: inline-block;
-    width: 250px;
+    width: 270px;
 }
 
 .authorSearchResultDiv {
@@ -160,7 +166,9 @@ body {
 
 .yesNoTitleSearch {
     background-color: #c5c6c75f;
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    /* font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; */
+    font-family: 'Courier New', Courier, monospace;
+
     color: #66FCF1;
     font-size: 40px;
     width: 100px;

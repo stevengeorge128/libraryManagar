@@ -8,11 +8,14 @@ const { User } = require('./schemas/userSchema');
 
 const bookFetchHandler = require('./bookFetchHandler');
 const moreSearchOptions = require('./moreSearchOptions');
+const loadBookPage = require('./loadBookPage')
 
 const crypto = require("crypto")
 const parser = require('body-parser');
-// const cookieParser = require('cookie-parser');
+const cookieParser = require('cookie-parser');
 app.use(parser.json());
+app.use(cookieParser());
+
 
 
 /*
@@ -111,7 +114,7 @@ function removeSession() {
     for (user in usernamesFromSessions) {
         // For each user check if thy have existed for longer then the time specified in the 
         // if statement. If so, log them out.
-        console.log(usernamesFromSessions[user], "\t", sessions);
+        console.log(sessions);
         userTime = sessions[usernamesFromSessions[user]].time;
         if ((userTime + (60000 * 10)) < currentTime) {
             delete sessions[usernamesFromSessions[user]]
@@ -125,13 +128,21 @@ setInterval(removeSession, 2000); // Check sessions every two seconds;
 app.get("/get/title/:title", async (req, res) => {
     try {
         let handlingFetchData = await bookFetchHandler.parseBookTitleSearch(req.params.title)
-        let userResponse = handlingFetchData;
-        let temp = new tempBookLookup(handlingFetchData);
-        let savingTemp = await temp.save();
-        let id = savingTemp._id.toHexString()
-        delete userResponse.extendedInfo;
-        delete userResponse.allDocs;
-        res.status(200).json([userResponse, id]);
+        if (handlingFetchData == false){
+            res.status(404).end();
+        } else{
+            let userResponse = handlingFetchData;
+            let temp = new tempBookLookup(handlingFetchData);
+            let savingTemp = await temp.save();
+            let bookHash = handlingFetchData.clientLookupHash;
+            sessions.dev.lookupHashes.push(bookHash);
+    
+            let id = savingTemp._id.toHexString()
+            delete userResponse.extendedInfo;
+            delete userResponse.allDocs;
+            res.status(200).json([userResponse, id]);
+        }
+
     } catch (err) {
         console.error(err);
         res.status(404).end()
@@ -142,13 +153,19 @@ app.get("/get/title/:title", async (req, res) => {
 // all books by that author and responds.
 app.get("/get/author/:author", async (req, res) => {
     try {
-        let handlingFetchData = await bookFetchHandler.parseBookAuthorSearch(req.params.author);
+        
+        let data = await bookFetchHandler.parseBookAuthorSearch(req.params.author);
+        console.log(data)
+        let handlingFetchData = data[0];
+        let hashes = data[1];
         //console.log(handlingFetchData);
         for (let book of handlingFetchData){
             let temp = new tempBookLookup(book);
             let savingTemp = await temp.save();
             let id = savingTemp._id.toHexString()
-
+            for (bookHash of hashes){
+                sessions.dev.lookupHashes.push(bookHash);
+            }
             delete book.extendedInfo;
             delete book.allDocs;
         }
@@ -170,6 +187,8 @@ app.get("/get/authAndTitle/:title/:author", async (req, res) => {
         } else{
             let temp = new tempBookLookup(handlingFetchData);
             let savingTemp = await temp.save();
+            let bookHash = handlingFetchData.clientLookupHash;
+            sessions.dev.lookupHashes.push(bookHash);
             let id = savingTemp._id.toHexString()
             delete handlingFetchData.extendedInfo;
             delete handlingFetchData.allDocs;
@@ -202,6 +221,25 @@ app.post("/post/notTitleAndOrAuthResult", async (req, res) => {
     //console.log(gettingOtherSearchOptions);
     res.status(200).json(gettingOtherSearchOptions);
 })
+
+app.post("/post/loadBookPage", async (req, res) => {
+    console.log(req.body);
+    let bookHash = req.body.bookHash;
+    let cookies = req.cookies;
+    let username = cookies.login.username;
+    let inSession = await loadBookPage.checkSessionsForBookHash(username, bookHash, sessions, tempBookLookup);
+
+    if (inSession == false) {
+        res.status(404).end()
+    } else{
+
+        
+
+        res.status(200).json(inSession);
+
+    }
+})
+
 
 
 app.listen(port, () =>

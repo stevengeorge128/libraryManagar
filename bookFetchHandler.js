@@ -44,18 +44,20 @@ async function parseBookAuthorSearch(author) {
         let data = await gettingAuthorFromGoogle.json();
         let numFound = data.totalItems;
         var userResponse = [];
+        let hashes = [];
         if (numFound > 0) {
             for (let i = 0; i < data.items.length; i++) {
                 try {
                     let doc = data.items[i];
                     let thisInfo = createLookupInfo(doc, data);
                     userResponse.push(thisInfo)
+                    hashes.push(thisInfo.clientLookupHash)
                 }
                 catch (err) {
                     console.error(err)
                 }
             }
-            return userResponse
+            return [userResponse, hashes]
         }
         return data;
     } else {

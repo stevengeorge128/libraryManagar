@@ -161,12 +161,13 @@ async function noToTitleAndOrAuthorSearch() {
 
 function selectThisBook(index) {
 
-    window.location.href = "/html/bookPage.html";
-    console.log("bookSelected")
-    console.log(index);
-    console.log(bookListInfo[index])
+
+    // console.log("bookSelected")
+    // console.log(index);
+    // console.log(bookListInfo[index])
     let bookHash = bookListInfo[index].clientLookupHash;
     window.localStorage.setItem("lookupHash", bookHash)    
+    window.location.href = "/html/bookPage.html";
 }
 
 async function authenticate() {

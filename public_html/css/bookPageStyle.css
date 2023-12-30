@@ -3,7 +3,8 @@ body {
     background-image: url("../backgrounds/bg_bggenerator_com.png");
     /* background-size: 100% 100%; */
     background-position: center;
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    /* font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; */
+    font-family: 'Courier New', Courier, monospace;
     margin: 0%;
 }
 
@@ -19,4 +20,148 @@ body {
     align-items: center;
     justify-content: left;
     padding-left: 2%;
+}
+
+#bookTitle {
+    color: #66FCF1;
+    position: fixed;
+    top: 10%;
+    width: 100%;
+    height: 10%;
+    left: 0;
+    font-size: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#bookPageRightHalf {
+    /* background-color: red;
+    position:fixed;
+    top: 22%;
+    left: 51%;
+    width:39%; */
+    position: fixed;
+    top: 22%;
+    color: #66FCF1;
+    width: 39%;
+    left: 51%;
+    height: 60%;
+    font-size: 40px;
+    overflow-y: scroll;
+    background-color: red;
+    /* 
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        row-gap: 20px; */
+
+}
+
+/* #bookPageSeeMoreInfo{
+
+}
+    
+#bookPageSeeMoreInfo:hover {
+    background-color: #c5c6c77c;
+    /* Change the background color on hover */
+
+
+#bookPageSeeMoreInfo {
+    background-color: #c5c6c75f;
+    /* font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; */
+    font-family: 'Courier New', Courier, monospace;
+
+    color: #66FCF1;
+    font-size: 40px;
+    width: 100%;
+    height: 50px;
+    ;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.05s all linear;
+}
+
+#bookPageSeeMoreInfo:active {
+    transform: scale(0.98);
+    /* Scaling button to 0.98 to its original size */
+    box-shadow: 3px 2px 22px 1px white;
+    /* Lowering the shadow */
+}
+
+#bookPageInitialInfo {}
+
+.bookPageTableRightColumn {
+    color: white
+}
+
+td {
+    vertical-align: top;
+}
+
+#descriptionTD {
+    font-size: 20px;
+}
+
+
+
+
+#bookPageLeftHalf {
+    position: fixed;
+    top: 22%;
+    color: #66FCF1;
+    width: 39%;
+    left: 10%;
+    height: 60%;
+    font-size: 40px;
+    overflow-y: scroll;
+    background-color: red;
+    display: flex;
+    flex-direction: row;
+    column-gap: 15px;
+    align-items: center ;
+    justify-content: center;
+}
+
+#bookPageImage{
+    height: 300px;
+}
+
+
+#bookPageButtons{
+    height:300px;
+    width: 400px;
+    background-color: blue;
+}
+
+
+#bookPageOptionsTable{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+.bookPageOptionsButton {
+    background-color: #c5c6c75f;
+    /* font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; */
+    font-family: 'Courier New', Courier, monospace;
+
+    color: #66FCF1;
+    font-size: 20px;
+    width: 100%;
+    height: 100%;
+
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.05s all linear;
+}
+
+.bookPageOptionsButton:active {
+    transform: scale(0.98);
+    /* Scaling button to 0.98 to its original size */
+    box-shadow: 3px 2px 22px 1px white;
+    /* Lowering the shadow */
 }
