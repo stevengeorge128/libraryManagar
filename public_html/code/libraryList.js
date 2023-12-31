@@ -1,3 +1,7 @@
+function libraryItem() {
+    console.log("list item selected")
+}
+
 
 
 function toLibraryList(){

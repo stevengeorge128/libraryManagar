@@ -77,3 +77,31 @@ body {
     box-shadow: 3px 2px 22px 1px white;
     /* Lowering the shadow */
 }
+
+#libraryList{
+    position: fixed;
+    top: 22%;;
+}
+
+
+.libraryListElement{
+    transition: 0.05s all linear;
+    cursor: pointer;
+
+    background-color: #c5c6c75f;
+    /* font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; */
+    font-family: 'Courier New', Courier, monospace;
+
+    color: #66FCF1;
+    font-size: 20px;
+    border-radius: 5px;
+}
+
+.libraryListElement:active{
+    transition: 0.05s all linear;
+    transform: scale(0.98);
+        cursor: pointer; /* Set the cursor to a pointer */
+    /* Scaling button to 0.98 to its original size */
+    box-shadow: 3px 2px 22px 1px white;
+    
+}
