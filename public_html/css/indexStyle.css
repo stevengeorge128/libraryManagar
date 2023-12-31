@@ -54,15 +54,7 @@ body {
 
 }
 
-#searchFields {
-    padding-top: 15px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    row-gap: 20px;
 
-}
 
 #thisTheBookPrompt {
     padding-top: 25px;
@@ -81,7 +73,7 @@ body {
 
 #rightSideResult {
     position: fixed;
-    top: 20%;
+    top: 22%;
     color: #66FCF1;
     width: 39%;
     left: 51%;
@@ -89,6 +81,7 @@ body {
     height: 60%;
     display: flex;
     flex-direction: column;
+
 
     /* justify-content: center; */
     align-items: center;
@@ -110,55 +103,9 @@ body {
 
 }
 
-.searchInput {
-    border: 0;
-    margin-top: 15px;
-    margin-bottom: 15px;
 
-    padding-left: 10px;
-    margin: 0;
-    height: 20px;
-    background-color: #c5c6c75f;
-    /* font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; */
-    font-family: 'Courier New', Courier, monospace;
 
-    color: #66FCF1;
-    width: 350px;
-    height: 100%;
-    font-size: 40px;
-    border-radius: 15px;
-    display: inline-block;
-}
 
-#submitBookSearch {
-    background-color: #c5c6c75f;
-    /* font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; */
-    font-family: 'Courier New', Courier, monospace;
-
-    color: #66FCF1;
-    font-size: 40px;
-    width: 50%;
-    height: 100%;
-
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: 0.05s all linear;
-}
-
-#submitBookSearch:active {
-    transform: scale(0.98);
-    /* Scaling button to 0.98 to its original size */
-    box-shadow: 3px 2px 22px 1px white;
-    /* Lowering the shadow */
-}
-
-.searchLabel {
-    margin-top: 15px;
-
-    display: inline-block;
-    width: 270px;
-}
 
 .authorSearchResultDiv {
     font-size: 25px;
@@ -224,11 +171,139 @@ body {
 
 }
 
-#inputSearchResult{
+/* #inputSearchResult{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     padding-top: 50px;
+
+} */
+
+#headerMenu {
+    position: fixed;
+
+
+    color: #66FCF1;
+    width: 48%;
+    left: 50%;
+    height: 10%;
+    top: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    column-gap: 10px;
+
+}
+
+.headerButton {
+    background-color: #c5c6c75f;
+    /* font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; */
+    font-family: 'Courier New', Courier, monospace;
+
+    color: #66FCF1;
+    font-size: 20px;
+
+
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 120px;
+    height: 60px;
+    transition: 0.05s all linear;
+}
+
+.headerButton:active {
+    transform: scale(0.98);
+    /* Scaling button to 0.98 to its original size */
+    box-shadow: 3px 2px 22px 1px white;
+    /* Lowering the shadow */
+}
+
+
+
+
+#searchFields {
+
+
+    position: fixed;
+    top: 22%;
+    color: #66FCF1;
+    width: 39%;
+    left: 10%;
+    height: 60%;
+    font-size: 30px;
+
+}
+
+#bookTitleSearchDiv {
+    height: 20%;
+}
+
+#bookAuthorSearchDiv {
+    height: 20%;
+
+}
+
+#submitBookSearchDiv {
+    height: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+#submitBookSearch {
+    height: 100%;
+    width: 60%;
+    color: #66FCF1;
+    font-size: 30px;
+    font-family: 'Courier New', Courier, monospace;
+    background-color: #c5c6c75f;
+    border: 0;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.05s all linear;
+
+}
+
+
+
+#submitBookSearch:active {
+    transform: scale(0.98);
+    /* Scaling button to 0.98 to its original size */
+    box-shadow: 3px 2px 22px 1px white;
+    /* Lowering the shadow */
+}
+
+#inputSearchResult {
+    height: 50%;
+
+}
+
+.searchFieldDiv {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.searchLabel {
+    width: 45%;
+}
+
+.searchInput {
+    width: 55%;
+    height: 75%;
+    color: #66FCF1;
+    font-size: 30px;
+    font-family: 'Courier New', Courier, monospace;
+    background-color: #c5c6c75f;
+    border: 0;
+    border-radius: 5px;
+
+
 
 }

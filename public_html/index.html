@@ -15,29 +15,42 @@
         <h1>LIBRARY MANAGER</h1>
     </div>
 
+    <div id = "headerMenu">
+        <button class = "headerButton" id = "libraryHeaderButton">Your Libraries</button>
+        <button class = "headerButton" id = "searchHeaderButton">Book Search</button>
+        <button class = "headerButton" id = "extra1"> Extra Button</button>
+        <button class = "headerButton" id = "extra2">Extra Button</button>
+        <button class = "headerButton" id = "extra3">Extra Button</button>
+        <button class = "headerButton" id = "logOutHeaderButton">Log Out</button>
+
+
+
+    </div>
+
     <div id=bookSearchHeading>BOOK SEARCH</div>
 
 
-    <div id="searchAndResultDiv">
+
         <div id="searchFields">
 
-            <div id="bookTitleSearchDiv">
+            <div id="bookTitleSearchDiv" class = searchFieldDiv>
                 <label  class = "searchLabel" for="bookSearchInput">BOOK TITLE:</label>
                 <input  class = "searchInput" type="text" id="bookSearchInput">
             </div>
 
-            <div id="bookAuthorSearchDiv">
+            <div id="bookAuthorSearchDiv" class = searchFieldDiv>
                 <label class = "searchLabel" for="authorInput">AUTHOR:</label>
                 <input class = "searchInput" type="text" id="authorInput">
             </div>
+            <div id = "submitBookSearchDiv" >
             <input type="submit" id="submitBookSearch" value="SEARCH" onclick = "bookSearch()">
+        </div>
+            <div id="inputSearchResult">
+            </div>
 
-
-
+ 
         </div>
 
-        <div id="inputSearchResult">
-        </div>
         <div id="rightSideResult">
 
 
@@ -51,7 +64,9 @@
             </div> -->
     
         </div>
-    </div>
+
+
+    
 
 
 

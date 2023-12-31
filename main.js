@@ -89,6 +89,23 @@ app.get("/auth", async (req, res) => {
     }
 })
 
+app.get("/logout", async (req, res) => {
+    try {
+        console.log("inside logout")
+        let keys = Object.keys(sessions);
+        let username = req.cookies.login.username;
+        console.log(keys);
+        console.log(username);
+        if (keys.includes(username)){
+            delete sessions[username];
+        }
+        res.status(200).end();
+    } catch (err) {
+        console.error(err);
+        res.status(404).end()
+    }
+})
+
 
 function addSession(uname) {
     /*
