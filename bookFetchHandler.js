@@ -10,6 +10,8 @@ async function parseBookTitleSearch(title) {
             if (numFound > 0) {
                 let doc = data.items[0];
                 let thisInfo = createLookupInfo(doc, data);
+
+                
                 return thisInfo
             } else {
                 return false

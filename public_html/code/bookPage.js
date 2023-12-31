@@ -1,6 +1,7 @@
 var bookInfo = {};
 
 async function loadPage() {
+    authenticate();
     console.log("loadPage is running");
     console.log(window.localStorage.getItem("lookupHash"));
     if (window.localStorage.getItem("lookupHash") == undefined) {
@@ -15,6 +16,7 @@ async function loadPage() {
         credentials: 'include', // Include credentials in the request
     });
     let response = await loading.json();
+    console.log("json response is ", response)
     convertServerResponseToHtml(response);
 }
 

@@ -64,10 +64,10 @@ app.get("/login", async (req, res) => {
     try {
         let sesID = addSession("dev");
         res.status(200)
-        .cookie("login",
-            { username: "dev", sessionID: sesID },
-            { maxAge: (60000 * 10) })
-    .end("success");
+            .cookie("login",
+                { username: "dev", sessionID: sesID },
+                { maxAge: (60000 * 10) })
+            .end("success");
     } catch (err) {
         console.error(err);
         res.status(404).end()
@@ -78,9 +78,9 @@ app.get("/auth", async (req, res) => {
     try {
 
         let keys = Object.keys(sessions);
-        if (!(keys.includes("dev"))){
+        if (!(keys.includes("dev"))) {
             res.status(401).end("failed")
-        } else{
+        } else {
             res.status(200).end("success")
         }
     } catch (err) {
@@ -128,15 +128,15 @@ setInterval(removeSession, 2000); // Check sessions every two seconds;
 app.get("/get/title/:title", async (req, res) => {
     try {
         let handlingFetchData = await bookFetchHandler.parseBookTitleSearch(req.params.title)
-        if (handlingFetchData == false){
+        if (handlingFetchData == false) {
             res.status(404).end();
-        } else{
+        } else {
             let userResponse = handlingFetchData;
             let temp = new tempBookLookup(handlingFetchData);
             let savingTemp = await temp.save();
             let bookHash = handlingFetchData.clientLookupHash;
             sessions.dev.lookupHashes.push(bookHash);
-    
+
             let id = savingTemp._id.toHexString()
             delete userResponse.extendedInfo;
             delete userResponse.allDocs;
@@ -153,17 +153,17 @@ app.get("/get/title/:title", async (req, res) => {
 // all books by that author and responds.
 app.get("/get/author/:author", async (req, res) => {
     try {
-        
+
         let data = await bookFetchHandler.parseBookAuthorSearch(req.params.author);
         console.log(data)
         let handlingFetchData = data[0];
         let hashes = data[1];
         //console.log(handlingFetchData);
-        for (let book of handlingFetchData){
+        for (let book of handlingFetchData) {
             let temp = new tempBookLookup(book);
             let savingTemp = await temp.save();
             let id = savingTemp._id.toHexString()
-            for (bookHash of hashes){
+            for (bookHash of hashes) {
                 sessions.dev.lookupHashes.push(bookHash);
             }
             delete book.extendedInfo;
@@ -181,10 +181,10 @@ app.get("/get/author/:author", async (req, res) => {
 // to user
 app.get("/get/authAndTitle/:title/:author", async (req, res) => {
     try {
-        let handlingFetchData = await bookFetchHandler.parseTitleAndAuthorSearch(req.params.title, req.params.author) 
-        if (handlingFetchData == false){
+        let handlingFetchData = await bookFetchHandler.parseTitleAndAuthorSearch(req.params.title, req.params.author)
+        if (handlingFetchData == false) {
             res.status(404).end();
-        } else{
+        } else {
             let temp = new tempBookLookup(handlingFetchData);
             let savingTemp = await temp.save();
             let bookHash = handlingFetchData.clientLookupHash;
@@ -217,27 +217,41 @@ app.get("/get/notTitleAndOrAuthResult/:result", (req, res) => {
 app.post("/post/notTitleAndOrAuthResult", async (req, res) => {
     // console.log("inside the req");
     // console.log(req.body.tempLookup);
-    let gettingOtherSearchOptions = await moreSearchOptions.getOtherSearchResultsFromDoc(req.body.tempLookup);
+    let data = await moreSearchOptions.getOtherSearchResultsFromDoc(req.body.tempLookup);
+    let  gettingOtherSearchOptions = data[0];
+    let hashes = data[1];
+    for (bookHash of hashes) {
+        sessions.dev.lookupHashes.push(bookHash);
+    }
     //console.log(gettingOtherSearchOptions);
     res.status(200).json(gettingOtherSearchOptions);
 })
 
 app.post("/post/loadBookPage", async (req, res) => {
-    console.log(req.body);
+    console.log("loadBookPage route body is ", req.body);
     let bookHash = req.body.bookHash;
     let cookies = req.cookies;
-    let username = cookies.login.username;
-    let inSession = await loadBookPage.checkSessionsForBookHash(username, bookHash, sessions, tempBookLookup);
+    if (cookies == undefined) { 
+        console.log("loadBookPage cookies are undefined")
+        res.status(404).end(); }
+    else {
+        let username = cookies.login.username;
+        console.log(username)
+        let inSession = await loadBookPage.checkSessionsForBookHash(username, bookHash, sessions, tempBookLookup);
+        if (inSession == false) {
+            console.log("loadBookPage insession is udnefined")
 
-    if (inSession == false) {
-        res.status(404).end()
-    } else{
+            res.status(404).end();
+        } else {
 
-        
 
-        res.status(200).json(inSession);
+            console.log("loadBookPage route sent 200")
+            res.status(200).json(inSession);
 
+        }
     }
+
+
 })
 
 
