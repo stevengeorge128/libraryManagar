@@ -85,6 +85,8 @@ body {
     width: 40%;
     left: 30%;
     background-color: #c5c6c75f;
+    border-radius: 5px;;
+
 }
 
 #libraryList{
@@ -132,6 +134,66 @@ body {
     height: 65%;
     overflow: scroll;
     width: 20%;
-
     background-color: #c5c6c75f;
+    border-radius: 5px;;
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items: center;
+
+}
+
+#libraryListOptionTitle{
+    background-color: transparent;
+    /* font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; */
+    font-family: 'Courier New', Courier, monospace;
+    color: #66FCF1;
+    font-size: 30px;
+
+    border-radius: 5px;
+    cursor: pointer;
+    width: 120px;
+    height: 60px;
+
+}
+
+
+.libraryListPageButtons{
+    border: solid 2px #c5c6c75f;
+    background-color: transparent;
+    /* font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; */
+    font-family: 'Courier New', Courier, monospace;
+
+    color: #66FCF1;
+    font-size: 20px;
+
+    border-radius: 5px;
+    cursor: pointer;
+    width: 120px;
+    height: 60px;
+    transition: 0.05s all linear;
+    margin-bottom: 5%;
+}
+.libraryListPageButtons:active{
+    transform: scale(0.98);
+    /* Scaling button to 0.98 to its original size */
+    box-shadow: 3px 2px 22px 1px white;
+    /* Lowering the shadow */
+}
+
+
+#centerAreaLibraryListPage{
+    position: fixed;top: 27%;height: 60%; overflow: scroll; width: 40%;border-radius:5px;left: 30%;list-style-type: none;padding: 0;margin: 0;background-color: #c5c6c75f;font-family: 'Courier New', Courier, monospace;color: #66FCF1;    margin-top: 10px;    font-size: 30px;
+}
+
+#labelColumn{
+    position: fixed; top: 27%; height: 60%; width: 20%; left: 30%; background-color: white; border-radius: 5px; margin-top: 10px;display: flex; flex-direction: column; row-gap: 15px;;
+}
+
+#inputColumn{
+    position: fixed; top: 27%; height: 60%; width: 20%; left: 50%; background-color: white; border-radius: 5px; margin-top: 10px;display: flex; flex-direction: column; row-gap: 15px;;
+}
+
+.newLibraryLabelClass{
+    background-color: rgba(0, 128, 0, 0.22);
 }

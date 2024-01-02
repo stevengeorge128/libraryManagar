@@ -27,11 +27,38 @@
 
     <div id=bookSearchHeading>Your Libraries</div>
 
-    <div id = "librariesSearchDiv">
+    <div id="librariesSearchDiv">
         search will go here
     </div>
 
-    <ul id="libraryList">
+
+    <div id="centerAreaLibraryListPage">
+
+
+
+        <div id="labelColumn">
+            <div id="nameInputLabel" class="newLibraryLabelClass" for="nameInput">Name:</div>
+            <div id="locationInputLabel" class="newLibraryLabelClass" for="locationInput">Location</div>
+            <div id="descriptionInputLabel" class="newLibraryLabelClass" for="descriptionInput">
+                Description</div>
+        </div>
+    
+        <div id="inputColumn">
+            <input id="nameInput" class="newLibraryInputClass" type="text">
+            <input id="locationInput" class="newLibraryInputClass" type="text">
+            <textarea name="newLibraryDescriptionTextArea" class="newLibraryInputClass" id="descriptionInput"></textarea>
+    
+    
+        </div>
+    
+        <div id="submitNewLibraryButton">
+            <button id="newLibraryCreateButton" class="newLibraryFormClass">CREATE</button>
+        </div>
+
+
+
+
+        <!-- <ul id="libraryList">
         <li class="libraryListElement" onclick="libraryItem(1)">
             <div class = "librariesListTitle">NAME: ${name}</div>
             <div class = "librariesListTitle">LOCATION: ${location}</div>  
@@ -83,14 +110,22 @@
             <div class = "librariesListTitle">${name}</div>
             <div class = "librariesListTitle">${location}</div>  
             <div class = "librariesListTitle">${creator}</div>            
-        </li>
+        </li> -->
 
-    </ul>
+        </ul>
+    </div>
+
+    <div id="createLibrarySection">
+        <div id="libraryListOptionTitle">Options</div>
+        <button id="newLibraryButton" class="libraryListPageButtons">New Library</button>
+        <button id="Open Library Button" class="libraryListPageButtons">Open Library</button>
+        <button id="extra1" class="libraryListPageButtons">Extra1</button>
+        <button id="extra2" class="libraryListPageButtons">Extra2</button>
+        <button id="extra3" class="libraryListPageButtons">Extra3</button>
+        <button id="extra4" class="libraryListPageButtons">Extra4</button>
 
 
-    <div id = "createLibrarySection">
 
-        
     </div>
 
 

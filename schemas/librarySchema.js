@@ -6,6 +6,7 @@ var Schema = mongoose.Schema;
 // Establish four required schemas
 var librarySchema = new Schema({
     name: String,
+    description: String,
     location: String,
     creator: String,
     owner: String,
