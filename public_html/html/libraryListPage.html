@@ -15,25 +15,85 @@
         <h1>LIBRARY MANAGER</h1>
     </div>
 
-    <div id = "headerMenu">
-        <button class = "headerButton" id = "libraryHeaderButton" onclick="toLibraryList()">Your Libraries</button>
-        <button class = "headerButton" id = "searchHeaderButton" onclick="toBookSearch()">Book Search</button>
-        <button class = "headerButton" id = "extra1"> Extra Button</button>
-        <button class = "headerButton" id = "extra2">Extra Button</button>
-        <button class = "headerButton" id = "extra3">Extra Button</button>
-        <button class = "headerButton" id = "logOutHeaderButton" onclick="logOut()">Log Out</button>
+    <div id="headerMenu">
+        <button class="headerButton" id="libraryHeaderButton" onclick="toLibraryList()">Your Libraries</button>
+        <button class="headerButton" id="searchHeaderButton" onclick="toBookSearch()">Book Search</button>
+        <button class="headerButton" id="extra1"> Extra Button</button>
+        <button class="headerButton" id="extra2">Extra Button</button>
+        <button class="headerButton" id="extra3">Extra Button</button>
+        <button class="headerButton" id="logOutHeaderButton" onclick="logOut()">Log Out</button>
 
     </div>
 
     <div id=bookSearchHeading>Your Libraries</div>
 
-    <ul id = "libraryList">
-        <li class = "libraryListElement" onclick = "libraryItem()">First item</li>
+    <div id = "librariesSearchDiv">
+        search will go here
+    </div>
+
+    <ul id="libraryList">
+        <li class="libraryListElement" onclick="libraryItem(1)">
+            <div class = "librariesListTitle">NAME: ${name}</div>
+            <div class = "librariesListTitle">LOCATION: ${location}</div>  
+            <div class = "librariesListTitle">CREATOR: ${creator}</div>            
+        </li>
+
+        <li class="libraryListElement" onclick="libraryItem(1)">
+            <div class = "librariesListTitle">${name}</div>
+            <div class = "librariesListTitle">${location}</div>  
+            <div class = "librariesListTitle">${creator}</div>            
+        </li>
+
+        <li class="libraryListElement" onclick="libraryItem(1)">
+            <div class = "librariesListTitle">${name}</div>
+            <div class = "librariesListTitle">${location}</div>  
+            <div class = "librariesListTitle">${creator}</div>            
+        </li>
+
+        <li class="libraryListElement" onclick="libraryItem(1)">
+            <div class = "librariesListTitle">${name}</div>
+            <div class = "librariesListTitle">${location}</div>  
+            <div class = "librariesListTitle">${creator}</div>            
+        </li>
+                <li class="libraryListElement" onclick="libraryItem(1)">
+            <div class = "librariesListTitle">${name}</div>
+            <div class = "librariesListTitle">${location}</div>  
+            <div class = "librariesListTitle">${creator}</div>            
+        </li>
+
+        <li class="libraryListElement" onclick="libraryItem(1)">
+            <div class = "librariesListTitle">${name}</div>
+            <div class = "librariesListTitle">${location}</div>  
+            <div class = "librariesListTitle">${creator}</div>            
+        </li>
+
+        <li class="libraryListElement" onclick="libraryItem(1)">
+            <div class = "librariesListTitle">${name}</div>
+            <div class = "librariesListTitle">${location}</div>  
+            <div class = "librariesListTitle">${creator}</div>            
+        </li>
+
+        <li class="libraryListElement" onclick="libraryItem(1)">
+            <div class = "librariesListTitle">${name}</div>
+            <div class = "librariesListTitle">${location}</div>  
+            <div class = "librariesListTitle">${creator}</div>            
+        </li>
+
+        <li class="libraryListElement" onclick="libraryItem(1)">
+            <div class = "librariesListTitle">${name}</div>
+            <div class = "librariesListTitle">${location}</div>  
+            <div class = "librariesListTitle">${creator}</div>            
+        </li>
 
     </ul>
 
 
-  
+    <div id = "createLibrarySection">
+
+        
+    </div>
+
+
 
 
 

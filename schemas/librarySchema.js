@@ -18,10 +18,10 @@ var librarySchema = new Schema({
     bookshelves: String,
     subjects: String,
     recommendations: String,
-    title: String,
-    title: String,
-    title: String,
-    title: String,
+    extra: String,
+    extra: String,
+    extra: String,
+    extra: String,
 
 
 });

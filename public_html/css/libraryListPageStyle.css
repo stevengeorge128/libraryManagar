@@ -78,9 +78,27 @@ body {
     /* Lowering the shadow */
 }
 
-#libraryList{
+#librariesSearchDiv{
     position: fixed;
     top: 22%;;
+    height: 5%;
+    width: 40%;
+    left: 30%;
+    background-color: #c5c6c75f;
+}
+
+#libraryList{
+    position: fixed;
+    top: 27%;;
+    height: 60%;
+    overflow: scroll;
+    width: 40%;
+    left: 30%;
+
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    
 }
 
 
@@ -91,9 +109,9 @@ body {
     background-color: #c5c6c75f;
     /* font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; */
     font-family: 'Courier New', Courier, monospace;
-
+    margin-top: 10px;
     color: #66FCF1;
-    font-size: 20px;
+    font-size: 30px;
     border-radius: 5px;
 }
 
@@ -104,4 +122,16 @@ body {
     /* Scaling button to 0.98 to its original size */
     box-shadow: 3px 2px 22px 1px white;
     
+}
+
+#createLibrarySection{
+    position: fixed;
+    top: 22%;
+    right: 5%;
+
+    height: 65%;
+    overflow: scroll;
+    width: 20%;
+
+    background-color: #c5c6c75f;
 }

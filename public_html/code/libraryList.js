@@ -1,5 +1,5 @@
-function libraryItem() {
-    console.log("list item selected")
+function libraryItem(value) {
+    console.log("list item selected " , value)
 }
 
 
