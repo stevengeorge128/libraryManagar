@@ -182,18 +182,59 @@ body {
 }
 
 
-#centerAreaLibraryListPage{
+/* #centerAreaLibraryListPage{
     position: fixed;top: 27%;height: 60%; overflow: scroll; width: 40%;border-radius:5px;left: 30%;list-style-type: none;padding: 0;margin: 0;background-color: #c5c6c75f;font-family: 'Courier New', Courier, monospace;color: #66FCF1;    margin-top: 10px;    font-size: 30px;
-}
+} */
 
 #labelColumn{
-    position: fixed; top: 27%; height: 60%; width: 20%; left: 30%; background-color: white; border-radius: 5px; margin-top: 10px;display: flex; flex-direction: column; row-gap: 15px;;
+    
+
+    color: #66FCF1;font-family: 'Courier New', Courier, monospace; font-size:30px;position: fixed; top: 27%; height: 60%; width: 15%; left: 30%; background-color: transparent; border-radius: 5px; margin-top: 10px;display: flex; flex-direction: column; row-gap: 15px;;
 }
 
 #inputColumn{
-    position: fixed; top: 27%; height: 60%; width: 20%; left: 50%; background-color: white; border-radius: 5px; margin-top: 10px;display: flex; flex-direction: column; row-gap: 15px;;
+    
+    position: fixed; top: 27%; height: 60%; width: 25%; left: 45%; background-color:transparent; border-radius: 5px; margin-top: 10px;display: flex; flex-direction: column; row-gap: 15px;;
 }
 
 .newLibraryLabelClass{
-    background-color: rgba(0, 128, 0, 0.22);
+    height: 15%; display: flex; align-items: center; justify-content: left;
+}
+
+.newLibraryInputClass{
+    background-color:#c5c6c75f;border: none;margin: 0;padding: 0; height: 15%;border-radius: 5px;color: #66FCF1;font-family: 'Courier New', Courier, monospace; font-size:30px;
+
+}
+
+
+
+#newLibraryCreateButton {
+
+    width: 20%;
+    height: 10%;
+    position: fixed;
+    left: 40%;
+    top: 62%;
+    color: #66FCF1;
+    font-size: 30px;
+    font-family: 'Courier New', Courier, monospace;
+    background-color: #c5c6c75f;
+    border: 0;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.05s all linear;
+
+}
+
+
+
+#newLibraryCreateButton:active {
+    transform: scale(0.98);
+    /* Scaling button to 0.98 to its original size */
+    box-shadow: 3px 2px 22px 1px white;
+    /* Lowering the shadow */
+}
+
+textarea{
+    resize: none;
 }

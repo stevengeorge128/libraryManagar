@@ -15,8 +15,23 @@ function toBookSearch() {
 
 function newLibrary(){
     console.log("new library")
-    document.getElementById("centerAreaLibraryListPage").innerHTML = "hello";
-    document.getElementById("centerAreaLibraryListPage").style = "position: fixed;top: 27%;height: 60%; overflow: scroll; width: 40%;border-radius:5px;left: 30%;list-style-type: none;padding: 0;margin: 0;background-color: #c5c6c75f;font-family: 'Courier New', Courier, monospace;color: #66FCF1;    margin-top: 10px;    font-size: 30px;"
+    document.getElementById("centerAreaLibraryListPage").innerHTML = `<div id="labelColumn">
+    <div id="nameInputLabel" class="newLibraryLabelClass" for="nameInput">Name:</div>
+    <div id="locationInputLabel" class="newLibraryLabelClass" for="locationInput">Location</div>
+    <div id="descriptionInputLabel" class="newLibraryLabelClass" for="descriptionInput">
+        Description</div>
+</div>
+
+<div id="inputColumn">
+    <input id="nameInput" class="newLibraryInputClass" type="text">
+    <input id="locationInput" class="newLibraryInputClass" type="text">
+    <textarea name="newLibraryDescriptionTextArea" class="newLibraryInputClass" id="descriptionInput"></textarea>
+
+
+</div>
+
+    <button id="newLibraryCreateButton" class="newLibraryFormClass">CREATE</button>`;
+    // document.getElementById("centerAreaLibraryListPage").style = "position: fixed;top: 27%;height: 60%; overflow: scroll; width: 40%;border-radius:5px;left: 30%;list-style-type: none;padding: 0;margin: 0;background-color: #c5c6c75f;font-family: 'Courier New', Courier, monospace;color: #66FCF1;    margin-top: 10px;    font-size: 30px;"
 }
 
 async function logOut() {
